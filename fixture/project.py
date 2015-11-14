@@ -37,7 +37,7 @@ class ProjectHelper:
             self.load_projects_page()
             self.project_cache = []
             table = wd.find_elements_by_css_selector("table.width100")[1]
-            rows = table.find_elements_by_tag_name("tr")[1:]
+            rows = table.find_elements_by_tag_name("tr")[2:]
             for row in rows:
                 cols = row.find_elements_by_tag_name("td")
                 name = cols[0].text
