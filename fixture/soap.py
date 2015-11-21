@@ -1,6 +1,7 @@
 __author__ = 'Arseniy'
 from suds.client import Client
 from suds import WebFault
+from model.project import Project
 
 
 class SoapHelper:
@@ -15,3 +16,9 @@ class SoapHelper:
             return True
         except WebFault:
             return False
+
+    def get_project_list(self):
+        client = Client("http://localhost/mantisbt-1.2.19/api/soap/mantisconnect.php?wsdl")
+        soap_list = client.service.mc_projects_get_user_accessible("administrator", "root")
+        proj_list = [Project(name=e.name, description=e.description) for e in soap_list]
+        return proj_list
